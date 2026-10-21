@@ -59,6 +59,8 @@ npm run build
 
 React Router DOM gestiona la navegación; `qrcode.react` genera el QR en el navegador. El carrito usa el estado nativo de React.
 
+Las páginas se cargan bajo demanda con `React.lazy` y `Suspense`. Las imágenes de catálogo, carrito y galería usan carga nativa diferida (`loading="lazy"`) y variantes responsivas (`srcSet`/`sizes`) para descargar dimensiones adecuadas; las imágenes principales de detalle se solicitan con prioridad alta. Framer Motion usa `LazyMotion` y carga asíncrona de funciones para reducir el JavaScript inicial; las transiciones evitan filtros costosos y se respeta la preferencia del sistema para reducir movimiento.
+
 ## Issues y pull requests
 
 Antes de comenzar un cambio, revisa los issues abiertos del repositorio y sigue sus requisitos. Corrige los issues asignados o acordados, valida los cambios con `npm run lint` y `npm run build`, y envía el trabajo mediante un pull request hacia `main`, describiendo el issue relacionado y las pruebas realizadas. No subas cambios directamente a `main`.

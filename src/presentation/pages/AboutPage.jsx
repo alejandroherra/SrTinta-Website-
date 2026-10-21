@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal.jsx'
 
 function AboutPage() {
   return (
     <>
-      <section className="about-hero">
+      <Reveal as="section" className="about-hero">
         <div className="page-container about-hero-grid">
           <div className="page-heading">
             <p className="eyebrow">Familia, oficio y creatividad</p>
@@ -14,8 +15,8 @@ function AboutPage() {
             <p>Seis años transformando ideas en prendas que se sienten tan únicas como quienes las llevan.</p>
           </div>
         </div>
-      </section>
-      <section className="page-container about-story">
+      </Reveal>
+      <Reveal as="section" className="page-container about-story">
         <div className="about-story-aside">
           <p className="eyebrow">Nuestra historia</p>
           <span className="story-number">01—03</span>
@@ -28,7 +29,7 @@ function AboutPage() {
           <div className="signature">José Miguel &amp; Hannia <span>Sr&amp;Sra Tinta</span></div>
           <Link className="button" to="/contacto">Conversemos <span aria-hidden="true">↗</span></Link>
         </div>
-      </section>
+      </Reveal>
     </>
   )
 }

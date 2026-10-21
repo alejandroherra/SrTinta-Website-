@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { getServiceBySlug } from '../../domain/entities/services.js'
+import Reveal from '../components/Reveal.jsx'
 
 function ServiceDetailPage() {
   const { serviceSlug } = useParams()
@@ -16,7 +17,7 @@ function ServiceDetailPage() {
 
   return (
     <section className="service-detail-hero">
-      <div className="page-container service-detail-grid">
+      <Reveal className="page-container service-detail-grid">
         <div className="service-detail-symbol" aria-hidden="true">{service.icon}</div>
         <div>
           <p className="eyebrow">{service.pending ? 'En preparación' : 'Servicios del taller'}</p>
@@ -27,7 +28,7 @@ function ServiceDetailPage() {
             <Link className="button button-light" to="/servicios">Ver todos los servicios</Link>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

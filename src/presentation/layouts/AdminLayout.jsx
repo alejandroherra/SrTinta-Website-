@@ -1,5 +1,8 @@
 import { Link, Outlet } from 'react-router-dom'
+import { Suspense } from 'react'
 import BrandMark from '../components/BrandMark.jsx'
+import PageLoader from '../components/PageLoader.jsx'
+import PageTransition from '../components/PageTransition.jsx'
 
 function AdminLayout() {
   return (
@@ -15,7 +18,11 @@ function AdminLayout() {
           </Link>
           <span className="admin-label">Módulo independiente</span>
         </div>
-        <Outlet />
+        <PageTransition>
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
+        </PageTransition>
       </div>
     </main>
   )

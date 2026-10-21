@@ -1,5 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { m } from 'framer-motion'
+import Reveal from '../components/Reveal.jsx'
+import LazyImage from '../components/LazyImage.jsx'
+import { fadeUp } from '../../shared/utils/motionVariants.js'
 
 const projects = [
   { title: 'Color para todos los días', category: 'Serigrafía', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=85' },
@@ -40,17 +44,17 @@ function GalleryPage() {
           </button>
         ))}
       </div>
-      <div className="gallery-grid">
+      <Reveal className="gallery-grid" stagger>
         {visibleProjects.map((project, index) => (
-          <article className={`gallery-card gallery-card-${index % 3}`} key={project.title}>
-            <img src={project.image} alt={project.title} loading="lazy" />
+          <m.article className={`gallery-card gallery-card-${index % 3}`} key={project.title} variants={fadeUp}>
+            <LazyImage src={project.image} alt={project.title} sizes="(max-width: 680px) 46vw, 34vw" />
             <div className="gallery-overlay">
               <span>{project.category}</span>
               <h2>{project.title}</h2>
             </div>
-          </article>
+          </m.article>
         ))}
-      </div>
+      </Reveal>
       <div className="gallery-cta">
         <p>¿Te gustaría ver tu idea aquí?</p>
         <Link className="button" to="/contacto">Hagámosla realidad <span aria-hidden="true">↗</span></Link>

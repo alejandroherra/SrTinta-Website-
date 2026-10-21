@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { Link } from 'react-router-dom'
 import { getWhatsAppUrl } from '../../shared/constants/contact.js'
+import Reveal from '../components/Reveal.jsx'
 
 function QrPage() {
   const [copied, setCopied] = useState(false)
@@ -27,7 +28,7 @@ function QrPage() {
         <h1>Escanea, explora, conversemos.</h1>
         <p className="page-description">Comparte el sitio del taller o encuentra rápido lo que necesitas.</p>
       </div>
-      <div className="qr-layout">
+      <Reveal className="qr-layout">
         <div className="qr-card">
           <div className="qr-code"><QRCodeSVG value={siteUrl} size={220} level="H" includeMargin /></div>
           <span className="product-category">Sitio web Sr&amp;Sra Tinta</span>
@@ -43,7 +44,7 @@ function QrPage() {
           <a className="quick-link-card" href={getWhatsAppUrl()} target="_blank" rel="noreferrer"><span>04</span><strong>Escribir por WhatsApp</strong><b aria-hidden="true">↗</b></a>
           <Link className="quick-link-card" to="/contacto"><span>05</span><strong>Ubicación y contacto</strong><b aria-hidden="true">↗</b></Link>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

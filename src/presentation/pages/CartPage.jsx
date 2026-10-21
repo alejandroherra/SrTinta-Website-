@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { getWhatsAppUrl } from '../../shared/constants/contact.js'
 import formatPrice from '../../shared/utils/formatPrice.js'
+import LazyImage from '../components/LazyImage.jsx'
+import Reveal from '../components/Reveal.jsx'
 import useCart from '../hooks/useCart.js'
 
 function CartPage() {
@@ -26,11 +28,11 @@ function CartPage() {
           <Link className="button" to="/tienda">Explorar tienda</Link>
         </div>
       ) : (
-        <div className="cart-layout">
+        <Reveal className="cart-layout">
           <div className="cart-items">
             {items.map((item) => (
               <article className="cart-item" key={item.id}>
-                <img src={item.image} alt="" />
+                <LazyImage src={item.image} alt="" sizes="80px" />
                 <div className="cart-item-info">
                   <span className="product-category">{item.category}</span>
                   <h2>{item.name}</h2>
@@ -54,7 +56,7 @@ function CartPage() {
             <a className="button cart-checkout" href={getWhatsAppUrl(orderMessage)} target="_blank" rel="noreferrer">Consultar pedido por WhatsApp <span aria-hidden="true">↗</span></a>
             <Link className="text-link continue-shopping" to="/tienda">Seguir explorando</Link>
           </aside>
-        </div>
+        </Reveal>
       )}
     </section>
   )

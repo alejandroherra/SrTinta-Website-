@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { getProducts } from '../../app/services/productCatalog.js'
 import ProductCard from '../components/ProductCard.jsx'
+import Reveal from '../components/Reveal.jsx'
 
 const products = getProducts()
 
@@ -15,9 +16,9 @@ function ShopPage() {
         </div>
         <span className="sample-notice">Catálogo de demostración</span>
       </div>
-      <div className="product-grid">
+      <Reveal className="product-grid" stagger>
         {products.map((product) => <ProductCard key={product.id} product={product} />)}
-      </div>
+      </Reveal>
       <div className="shop-bottom">
         <p>¿Buscas algo personalizado para tu marca o equipo?</p>
         <Link className="button button-light" to="/contacto">Cuéntanos tu idea <span aria-hidden="true">↗</span></Link>

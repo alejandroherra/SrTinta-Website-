@@ -1,19 +1,22 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AdminLayout from '../../presentation/layouts/AdminLayout.jsx'
 import PublicLayout from '../../presentation/layouts/PublicLayout.jsx'
-import AboutPage from '../../presentation/pages/AboutPage.jsx'
-import CartPage from '../../presentation/pages/CartPage.jsx'
-import ContactPage from '../../presentation/pages/ContactPage.jsx'
-import FaqPage from '../../presentation/pages/FaqPage.jsx'
-import GalleryPage from '../../presentation/pages/GalleryPage.jsx'
-import HomePage from '../../presentation/pages/HomePage.jsx'
-import NotFoundPage from '../../presentation/pages/NotFoundPage.jsx'
-import ProductDetailPage from '../../presentation/pages/ProductDetailPage.jsx'
-import QrPage from '../../presentation/pages/QrPage.jsx'
-import ServiceDetailPage from '../../presentation/pages/ServiceDetailPage.jsx'
-import ServicesPage from '../../presentation/pages/ServicesPage.jsx'
-import ShopPage from '../../presentation/pages/ShopPage.jsx'
-import AdminDashboardPage from '../../presentation/pages/admin/AdminDashboardPage.jsx'
+import PageLoader from '../../presentation/components/PageLoader.jsx'
+
+const HomePage = lazy(() => import('../../presentation/pages/HomePage.jsx'))
+const AboutPage = lazy(() => import('../../presentation/pages/AboutPage.jsx'))
+const ShopPage = lazy(() => import('../../presentation/pages/ShopPage.jsx'))
+const ProductDetailPage = lazy(() => import('../../presentation/pages/ProductDetailPage.jsx'))
+const CartPage = lazy(() => import('../../presentation/pages/CartPage.jsx'))
+const ServicesPage = lazy(() => import('../../presentation/pages/ServicesPage.jsx'))
+const ServiceDetailPage = lazy(() => import('../../presentation/pages/ServiceDetailPage.jsx'))
+const GalleryPage = lazy(() => import('../../presentation/pages/GalleryPage.jsx'))
+const FaqPage = lazy(() => import('../../presentation/pages/FaqPage.jsx'))
+const ContactPage = lazy(() => import('../../presentation/pages/ContactPage.jsx'))
+const QrPage = lazy(() => import('../../presentation/pages/QrPage.jsx'))
+const AdminDashboardPage = lazy(() => import('../../presentation/pages/admin/AdminDashboardPage.jsx'))
+const NotFoundPage = lazy(() => import('../../presentation/pages/NotFoundPage.jsx'))
 
 function AppRouter() {
   return (
@@ -35,7 +38,14 @@ function AppRouter() {
         <Route index element={<AdminDashboardPage />} />
         <Route path="*" element={<AdminDashboardPage />} />
       </Route>
-      <Route path="*" element={<NotFoundPage />} />
+      <Route
+        path="*"
+        element={(
+          <Suspense fallback={<PageLoader />}>
+            <NotFoundPage />
+          </Suspense>
+        )}
+      />
     </Routes>
   )
 }

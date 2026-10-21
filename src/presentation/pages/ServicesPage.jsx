@@ -1,42 +1,47 @@
 import { Link } from 'react-router-dom'
+import { m } from 'framer-motion'
 import { services } from '../../domain/entities/services.js'
+import Reveal from '../components/Reveal.jsx'
+import { fadeUp } from '../../shared/utils/motionVariants.js'
+
+const MotionLink = m.create(Link)
 
 function ServicesPage() {
   return (
     <>
-      <section className="services-hero">
+      <m.section className="services-hero" initial="hidden" animate="visible" variants={fadeUp}>
         <div className="page-container">
           <p className="eyebrow">Lo pensamos, lo hacemos, lo llevas</p>
           <h1>Tu idea merece<br /><span>un buen acabado.</span></h1>
           <p>Personalización textil y soluciones creativas para personas, equipos y marcas.</p>
           <Link className="button" to="/contacto">Hablemos de tu proyecto <span aria-hidden="true">↗</span></Link>
         </div>
-      </section>
-      <section className="page-container service-list-section">
+      </m.section>
+      <Reveal as="section" className="page-container service-list-section">
         <div className="section-heading">
           <div><p className="eyebrow">Hecho en el taller</p><h2>Servicios para crear a tu manera.</h2></div>
           <p>Cuéntanos qué quieres producir y te ayudamos a encontrar la técnica y el acabado ideal.</p>
         </div>
-        <div className="service-grid">
+        <Reveal className="service-grid" stagger>
           {services.map((service) => (
-            <Link className={`service-card${service.pending ? ' service-card-pending' : ''}`} key={service.slug} to={`/servicios/${service.slug}`}>
+            <MotionLink className={`service-card${service.pending ? ' service-card-pending' : ''}`} key={service.slug} to={`/servicios/${service.slug}`} variants={fadeUp}>
               <span className="service-icon" aria-hidden="true">{service.icon}</span>
               {service.pending && <span className="pending-label">Próximamente</span>}
               <h3>{service.title}</h3>
               <p>{service.description}</p>
               <span className="service-arrow" aria-hidden="true">↗</span>
-            </Link>
+            </MotionLink>
           ))}
-        </div>
-      </section>
-      <EmbroideryHighlight />
+        </Reveal>
+      </Reveal>
+      <Reveal as="section"><EmbroideryHighlight /></Reveal>
     </>
   )
 }
 
 function EmbroideryHighlight() {
   return (
-    <section className="embroidery-highlight">
+    <div className="embroidery-highlight">
       <div className="page-container embroidery-grid">
         <div className="embroidery-art" aria-hidden="true">
           <div className="embroidered-circle"><span>SR<br />&amp; SRA<br />TINTA</span></div>
@@ -54,7 +59,7 @@ function EmbroideryHighlight() {
           <Link className="button" to="/servicios/bordado">Descubrir bordado <span aria-hidden="true">↗</span></Link>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 

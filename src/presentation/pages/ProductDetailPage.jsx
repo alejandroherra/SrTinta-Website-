@@ -2,6 +2,8 @@ import { Link, useParams } from 'react-router-dom'
 import { getProductById } from '../../app/services/productCatalog.js'
 import { getWhatsAppUrl } from '../../shared/constants/contact.js'
 import formatPrice from '../../shared/utils/formatPrice.js'
+import LazyImage from '../components/LazyImage.jsx'
+import Reveal from '../components/Reveal.jsx'
 import useCart from '../hooks/useCart.js'
 
 function ProductDetailPage() {
@@ -25,9 +27,9 @@ function ProductDetailPage() {
   return (
     <section className="page-container page-content">
       <Link className="text-link back-link" to="/tienda">← Volver a la tienda</Link>
-      <div className="product-detail">
+      <Reveal className="product-detail">
         <div className="product-detail-image">
-          <img src={product.image} alt={product.name} />
+          <LazyImage src={product.image} alt={product.name} loading="eager" sizes="(max-width: 680px) 90vw, 50vw" />
           <span className="sample-notice">Producto de muestra</span>
         </div>
         <div className="product-detail-copy">
@@ -39,7 +41,7 @@ function ProductDetailPage() {
           <button className="button" type="button" onClick={() => addItem(product)}>Agregar al carrito <span aria-hidden="true">＋</span></button>
           <a className="text-link detail-wa" href={getWhatsAppUrl(`Hola, quisiera consultar por ${product.name}.`)} target="_blank" rel="noreferrer">Consultar por WhatsApp ↗</a>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

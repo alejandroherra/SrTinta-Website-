@@ -10,7 +10,7 @@
   z-index: 10;
   border-bottom: 1px solid var(--line);
   background: rgb(250 249 246 / 94%);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
 }
 
 .header-inner,
@@ -152,6 +152,35 @@
 
 .site-main {
   flex: 1;
+}
+
+.route-transition {
+  min-height: 100%;
+}
+
+.page-loader {
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.page-loader-mark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent-strong);
+  border-radius: 50%;
+  animation: loader-spin 900ms linear infinite;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .home-hero {
@@ -602,6 +631,8 @@
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 
@@ -673,6 +704,7 @@
 .home-service {
   position: relative;
   min-height: 235px;
+  display: block;
   padding: 24px 22px;
   border-right: 1px solid var(--line);
   color: var(--ink);

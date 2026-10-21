@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import formatPrice from '../../shared/utils/formatPrice.js'
+import LazyImage from './LazyImage.jsx'
 import useCart from '../hooks/useCart.js'
 
 function ProductCard({ product }) {
@@ -8,7 +9,7 @@ function ProductCard({ product }) {
   return (
     <article className="product-card">
       <Link className="product-image-link" to={`/producto/${product.id}`} aria-label={`Ver ${product.name}`}>
-        <img className="product-image" src={product.image} alt={product.name} loading="lazy" />
+        <LazyImage className="product-image" src={product.image} alt={product.name} />
         <span className={`product-swatch swatch-${product.color}`} aria-hidden="true" />
       </Link>
       <div className="product-details">
