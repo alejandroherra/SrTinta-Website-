@@ -1,17 +1,28 @@
+import { motion } from 'framer-motion'
 import { getWhatsAppUrl } from '../../shared/constants/contact.js'
 
+// Es un motion.a directo (no un <a> envuelto en un motion.div) a propósito:
+// el botón usa position: fixed, y un ancestro con transform (lo que
+// framer-motion añade al animar) convierte ese fixed en relativo a ese
+// ancestro en vez del viewport. Animar el propio elemento evita el bug.
 function WhatsAppButton() {
   return (
-    <a
+    <motion.a
       className="whatsapp-float"
       href={getWhatsAppUrl()}
       target="_blank"
       rel="noreferrer"
       aria-label="Escríbenos por WhatsApp"
+      initial={{ opacity: 0, scale: 0.4, y: 30 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.4, y: 30 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+      whileHover={{ y: -3, scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
     >
       <WhatsAppIcon />
       <span>Hablemos</span>
-    </a>
+    </motion.a>
   )
 }
 
